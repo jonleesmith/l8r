@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/ffc8efee-cca1-4530-978f-c7bb51f92269/deploy-status)](https://app.netlify.com/sites/l8r/deploys)
+
 # l8r
 
 > My fine Nuxt.js project
