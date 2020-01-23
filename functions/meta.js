@@ -1,20 +1,23 @@
-import fetch from "node-fetch";
-
-const API_ENDPOINT = "https://icanhazdadjoke.com/";
+const { getMetadata } = require('page-metadata-parser');
+const domino = require('domino')
+const fetch = require('node-fetch')
 
 exports.handler = async (event, context) => {
-    return fetch(API_ENDPOINT, {
-        headers: {
-            "Accept": "application/json"
-        }
-    })
-    .then(response => response.json())
-    .then(data => ({
-        statusCode: 200,
-        body: data.joke
-    }))
-    .catch(error => ({
-        statusCode: 422,
-        body: String(error)
-    }));
-};
+    const url = event.queryStringParameters.url
+    return fetch(url)
+        .then( async (response) => {
+            const html = await response.text();
+            const doc = domino.createWindow(html).document;
+            const meta = getMetadata(doc, url);
+            return {
+                statusCode: 200,
+                body: JSON.stringify(meta)
+            }
+        })
+        .catch(err => ({
+                statusCode: 404,
+                body: 'No meta found'
+            })
+        );
+
+}
