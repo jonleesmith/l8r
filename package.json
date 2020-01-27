@@ -14,10 +14,12 @@
     "@nuxtjs/axios": "^5.9.3",
     "domino": "^2.1.4",
     "jsonbox-node": "^1.0.7",
+    "netlify-lambda": "^1.6.3",
     "nuxt": "^2.0.0",
     "page-metadata-parser": "^1.1.4"
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^1.0.0"
-  }
+  },
+  "postinstall": "netlify-lambda install"
 }
