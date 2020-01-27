@@ -1,11 +1,11 @@
 /* eslint-disable */
 const { getMetadata } = require('page-metadata-parser');
 const domino = require('domino')
-const fetch = require('node-fetch')
+const axios = require('axios')
 
 exports.handler = async function(event, context) {
     const url = event.queryStringParameters.url
-    return fetch(url)
+    return axios.get(url)
     .then(async (response) => {
         const html = await response.text();
         const doc = domino.createWindow(html).document;
