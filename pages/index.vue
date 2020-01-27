@@ -1,12 +1,21 @@
 <template>
-    <div class="container">
-        <div>
-            <input type="text" placeholder="Enter URL" v-model="url" />
-            <button @click.prevent="submit">Fetch</button>
-        </div>
+    <div class="main-container">
+        <form class="w-1/2 mx-auto" @submit.prevent="submit">
+            <input class="w-full py-4 px-6 rounded outline-none" type="text" placeholder="Enter URL and press enter..." v-model="url" />
+        </form>
         <Preview :url="url" @complete="addBookmark" v-if="addUrl"></Preview>
         <div>
-            <pre>{{ bookmarks }}</pre>
+            <ul>
+                <li v-for="(bookmark, key) in bookmarks" :key="key">
+                    <img :src="bookmark.icon" :alt="bookmark.title">
+                    <img :src="bookmark.image" :alt="bookmark.title">
+                    <p class="text-xl">{{ bookmark.title }}</p>
+                    <div>
+                        {{ bookmark.description }}
+                    </div>
+                    <a class="font-bold" :href="bookmark.url" target="_blank">{{ bookmark.url }}</a>
+                </li>
+            </ul>
         </div>
     </div>
 </template>
@@ -26,6 +35,10 @@
             }
         },
 
+        mounted() {
+
+        },
+
         methods: {
             submit() {
                 this.addUrl = true
@@ -41,12 +54,4 @@
 </script>
 
 <style>
-    .container {
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        width: 100%;
-    }
 </style>

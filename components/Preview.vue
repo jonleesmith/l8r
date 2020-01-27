@@ -5,8 +5,6 @@
     </div>
 </template>
 <script>
-    import { getMetadata } from 'page-metadata-parser';
-    import domino from 'domino'
 
     export default {
 
@@ -19,11 +17,15 @@
         },
 
         async mounted() {
-            const url = this.url;
-            const response = await fetch(url);
-            const html = await response.text();
-            const doc = domino.createWindow(html).document;
-            this.meta = getMetadata(doc, url);
+
+            let response = await this.$api.get('meta-url', {
+                params: {
+                    url: this.url
+                }
+            })
+
+            this.meta = response.data
+
             this.$emit('complete', this.meta)
         }
 
