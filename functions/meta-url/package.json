@@ -14,6 +14,8 @@
   "author": "Netlify",
   "license": "MIT",
   "dependencies": {
-    "node-fetch": "^2.3.0"
+    "domino": "^2.1.4",
+    "node-fetch": "^2.3.0",
+    "page-metadata-parser": "^1.1.4"
   }
 }
