@@ -1,41 +1,44 @@
 <template>
-    <div class="main-container">
+    <div>
         <form class="w-1/2 mx-auto" @submit.prevent="submit">
-            <input class="w-full py-4 px-6 rounded outline-none" type="text" placeholder="Enter URL and press enter..." v-model="url" />
+            <input class="w-full py-4 px-6 rounded outline-none bg-gray-800" type="text" placeholder="Enter URL and press enter..." v-model="url" />
         </form>
         <Preview :url="url" @complete="addBookmark" v-if="addUrl"></Preview>
-        <div>
-            <ul>
-                <li v-for="(bookmark, key) in bookmarks" :key="key">
-                    <img :src="bookmark.icon" :alt="bookmark.title">
-                    <img :src="bookmark.image" :alt="bookmark.title">
-                    <p class="text-xl">{{ bookmark.title }}</p>
-                    <div>
-                        {{ bookmark.description }}
-                    </div>
-                    <a class="font-bold" :href="bookmark.url" target="_blank">{{ bookmark.url }}</a>
-                </li>
-            </ul>
+        <div class="pt-12">
+            <div class="flex flex-wrap px-12">
+                <Bookmark 
+                    v-for="(bookmark, key) in bookmarks"
+                    :bookmark="bookmark"
+                    :key="key">
+                </Bookmark>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
+    import Bookmark from '~/components/Bookmark.vue'
     import Preview from '~/components/Preview.vue'
 
     export default {
         components: {
+            Bookmark,
             Preview
         },
         data() {
             return {
                 addUrl: false,
                 url: '',
-                bookmarks: [],
             }
         },
 
         mounted() {
+
+            // :style="{
+            //     background: `url(${bookmark.image})`,
+            //     'background-repeat': 'no-repeat',
+            //     'background-size': 'cover',
+            // }"
 
         },
 
@@ -45,10 +48,22 @@
             },
             addBookmark(meta) {
                 this.bookmarks.push(meta)
+                this.bookmarks = this.bookmarks
                 this.url = ''
                 this.addUrl = false
             }
-        }
+        },
+
+        computed: {
+            bookmarks: {
+                get: function() {
+                    return JSON.parse(localStorage.getItem('bookmarks')) || []
+                },
+                set: function(val) {
+                    localStorage.setItem('bookmarks', JSON.stringify(val))
+                }
+            }
+        },
 
     }
 </script>

@@ -15,8 +15,11 @@ exports.handler = async function(event, context) {
             body: JSON.stringify(meta)
         }
     })
+    .catch((err) => {
+        console.log(err)
+    })
     .catch(err => ({
         statusCode: 404,
         body: 'No meta found'
-    }));
+    }))
 }

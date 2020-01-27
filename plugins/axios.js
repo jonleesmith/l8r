@@ -18,12 +18,12 @@ export default function({ $axios, redirect }, inject) {
         console.log("Making request to " + config.url);
     });
 
-    api.onError(error => {
-        const code = parseInt(error.response && error.response.status);
-        if (code === 400) {
-            redirect("/400");
-        }
-    });
+    // api.onError(error => {
+    //     const code = parseInt(error.response && error.response.status);
+    //     if (code === 400) {
+    //         redirect("/400");
+    //     }
+    // });
 
     // Inject to context as $api
     inject("api", api);

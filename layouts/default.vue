@@ -16,8 +16,7 @@
 }
 
 html {
-    font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
+    @apply font-sans text-white;
     font-size: 16px;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
@@ -25,12 +24,11 @@ html {
 }
 
 body {
-    @apply bg-gray-200;
+    @apply bg-gray-900;
 }
 
 .wrapper {
-    max-width: 1100px;
-    @apply mx-auto;
+
 }
 
 .main-container {
