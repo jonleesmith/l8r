@@ -1,8 +1,5 @@
 <template>
     <div class="wrapper py-12">
-        <div class="py-12 text-center">
-            <h1 class="text-4xl">l8r</h1>
-        </div>
         <nuxt />
     </div>
 </template>
@@ -16,15 +13,14 @@
 }
 
 html {
-    @apply font-sans text-white;
-    font-size: 16px;
+    @apply font-sans text-gray-700 text-lg;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     box-sizing: border-box;
 }
 
 body {
-    @apply bg-gray-900;
+    @apply bg-gray-200;
 }
 
 .wrapper {
