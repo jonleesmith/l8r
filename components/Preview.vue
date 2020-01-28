@@ -1,36 +1,18 @@
 <template>
-    <div>
-        <div v-if="meta">{{ meta }}</div>
-        <p v-else>Fetching...</p>
+    <div class="text-center">
+        {{ meta }}
+        <button 
+        class="focus:outline-none bg-green-500 text-white font-semibold py-1 px-3 rounded"
+        @click.prevent="$emit('save', meta)">Save</button>
     </div>
 </template>
 <script>
 
+    
+
     export default {
 
-        props: ['url'],
-
-        data() {
-            return {
-                meta: null
-            }
-        },
-
-        async mounted() {
-
-            try {
-                let response = await this.$api.get('meta-url', {
-                    params: {
-                        url: this.url
-                    }
-                })
-                this.meta = response.data
-                this.$emit('complete', this.meta)
-            } catch(err) {
-                console.log(err)
-                this.$emit('error', err)
-            }
-        }
+        props: ['meta'],
 
     }
 </script>
