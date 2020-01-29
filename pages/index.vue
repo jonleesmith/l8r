@@ -1,20 +1,9 @@
 <template>
-    <div>
+    <div class="w-full mx-auto" style="max-width: 1000px;">
         <FormInput @complete="addBookmark"></FormInput>
-        <div class="actions flex items-center justify-center pt-6">
-            <button class="rounded-lg px-3 py-1 font-bold text-sm focus:outline-none"
-                :class="{ 'bg-white text-gray-800' : edit, 'bg-blue-500 text-white': !edit }"
-                @click.prevent="edit = !edit">
-                <span v-if="edit">
-                    Done
-                </span>
-                <span v-else>
-                    Edit
-                </span>
-            </button>
-        </div>
+        <ActionBar v-if="bookmarks.length" @trigger="updateOption"></ActionBar>
         <div>
-            <div class="flex flex-wrap px:6 lg:px-12">
+            <div class="flex flex-wrap -mx-2">
                 <Bookmark
                     :style="{ 'animation-delay': `0.${key}s` }"
                     v-for="(bookmark, key) in bookmarks"
@@ -31,12 +20,14 @@
 
 <script>
     import Bookmark from '~/components/Bookmark.vue'
+    import ActionBar from '~/components/ActionBar.vue'
     import Preview from '~/components/Preview.vue'
     import FormInput from '~/components/FormInput.vue'
 
     export default {
         components: {
             FormInput,
+            ActionBar,
             Bookmark,
             Preview
         },
@@ -61,6 +52,9 @@
             previewMeta(meta) {
                 this.meta = meta
             },
+            updateOption(type, val) {
+                this[type] = val
+            },
             addBookmark(meta) {
                 this.bookmarks.push(meta)
                 this.bookmarks = this.bookmarks
@@ -69,7 +63,7 @@
             remove(id) {
                 this.bookmarks.splice(id, 1)
                 this.bookmarks = this.bookmarks
-                this.edit = false
+                this.$forceUpdate()
             }
         },
 

@@ -19,7 +19,9 @@
     "page-metadata-parser": "^1.1.4"
   },
   "devDependencies": {
-    "@nuxtjs/tailwindcss": "^1.0.0"
+    "@nuxtjs/tailwindcss": "^1.0.0",
+    "node-sass": "^4.13.1",
+    "sass-loader": "^8.0.2"
   },
   "postinstall": "netlify-lambda install"
 }
